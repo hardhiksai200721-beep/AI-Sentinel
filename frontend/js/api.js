@@ -6,6 +6,17 @@
 
 const API_BASE_URL = "https://ai-sentinel-uueb.onrender.com";
 
+const DEFAULT_TIMEOUT = 120000;
+
+
+// ============================================================
+// SLEEP
+// ============================================================
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 // ============================================================
 // GENERIC REQUEST
@@ -15,15 +26,36 @@ async function apiRequest(endpoint, options = {}) {
 
     const url = `${API_BASE_URL}${endpoint}`;
 
+    const controller = new AbortController();
+
+    const timeout =
+        options.timeout || DEFAULT_TIMEOUT;
+
+    const timeoutId = setTimeout(() => {
+        controller.abort();
+    }, timeout);
+
+    const {
+        timeout: _ignoredTimeout,
+        ...fetchOptions
+    } = options;
+
     const config = {
-        ...options,
+        ...fetchOptions,
+
+        signal: controller.signal,
+
         headers: {
             Accept: "application/json",
-            ...(options.headers || {})
+            ...(fetchOptions.headers || {})
         }
     };
 
     try {
+
+        console.log(
+            `[AI Sentinel] ${config.method || "GET"} ${url}`
+        );
 
         const response = await fetch(url, config);
 
@@ -49,11 +81,20 @@ async function apiRequest(endpoint, options = {}) {
             }
         }
 
+
+        // ----------------------------------------------------
+        // HTTP ERROR
+        // ----------------------------------------------------
+
         if (!response.ok) {
 
-            let message = `HTTP ${response.status}`;
+            let message =
+                `HTTP ${response.status} ${response.statusText}`;
 
-            if (data && typeof data === "object") {
+            if (
+                data &&
+                typeof data === "object"
+            ) {
 
                 message =
                     data.detail ||
@@ -61,7 +102,10 @@ async function apiRequest(endpoint, options = {}) {
                     data.error ||
                     message;
 
-            } else if (typeof data === "string" && data.trim()) {
+            } else if (
+                typeof data === "string" &&
+                data.trim()
+            ) {
 
                 message = data;
             }
@@ -69,16 +113,28 @@ async function apiRequest(endpoint, options = {}) {
             throw new Error(message);
         }
 
+
         return data;
 
     } catch (error) {
 
+        if (error.name === "AbortError") {
+
+            throw new Error(
+                "Backend request timed out. Render may still be starting."
+            );
+        }
+
         console.error(
-            `API request failed: ${endpoint}`,
+            `[AI Sentinel] API request failed: ${endpoint}`,
             error
         );
 
         throw error;
+
+    } finally {
+
+        clearTimeout(timeoutId);
     }
 }
 
@@ -88,7 +144,78 @@ async function apiRequest(endpoint, options = {}) {
 // ============================================================
 
 async function getHealth() {
-    return apiRequest("/api/health");
+
+    return apiRequest(
+        "/api/health",
+        {
+            timeout: 120000
+        }
+    );
+}
+
+
+// ============================================================
+// WAKE RENDER BACKEND
+// ============================================================
+
+async function wakeBackend(
+    attempts = 3,
+    delay = 5000
+) {
+
+    let lastError = null;
+
+    for (
+        let attempt = 1;
+        attempt <= attempts;
+        attempt++
+    ) {
+
+        try {
+
+            console.log(
+                `[AI Sentinel] Backend health check ${attempt}/${attempts}`
+            );
+
+            const health = await getHealth();
+
+            if (
+                health &&
+                (
+                    health.status === "healthy" ||
+                    health.backend === "online"
+                )
+            ) {
+
+                console.log(
+                    "[AI Sentinel] Backend ONLINE"
+                );
+
+                return health;
+            }
+
+        } catch (error) {
+
+            lastError = error;
+
+            console.warn(
+                `[AI Sentinel] Backend not ready (${attempt}/${attempts})`,
+                error.message
+            );
+        }
+
+
+        if (attempt < attempts) {
+
+            await sleep(delay);
+        }
+    }
+
+
+    throw (
+        lastError ||
+        new Error("Backend is unavailable.")
+    );
 }
 
 
@@ -97,7 +224,12 @@ async function getHealth() {
 // ============================================================
 
 async function getDashboardStats() {
-    return apiRequest("/api/stats");
+
+    await wakeBackend();
+
+    return apiRequest(
+        "/api/stats"
+    );
 }
 
 
@@ -107,9 +239,15 @@ async function getDashboardStats() {
 
 async function getHistory(limit = 100) {
 
-    const params = new URLSearchParams();
+    await wakeBackend();
 
-    params.set("limit", String(limit));
+    const params =
+        new URLSearchParams();
+
+    params.set(
+        "limit",
+        String(limit)
+    );
 
     return apiRequest(
         `/api/history?${params.toString()}`
@@ -124,8 +262,13 @@ async function getHistory(limit = 100) {
 async function getScanById(scanId) {
 
     if (!scanId) {
-        throw new Error("Scan ID is required.");
+
+        throw new Error(
+            "Scan ID is required."
+        );
     }
+
+    await wakeBackend();
 
     return apiRequest(
         `/api/history/${encodeURIComponent(scanId)}`
@@ -140,8 +283,13 @@ async function getScanById(scanId) {
 async function deleteScan(scanId) {
 
     if (!scanId) {
-        throw new Error("Scan ID is required.");
+
+        throw new Error(
+            "Scan ID is required."
+        );
     }
+
+    await wakeBackend();
 
     return apiRequest(
         `/api/history/${encodeURIComponent(scanId)}`,
@@ -164,10 +312,17 @@ async function searchHistory({
     limit = 100
 } = {}) {
 
-    const params = new URLSearchParams();
+    await wakeBackend();
+
+    const params =
+        new URLSearchParams();
 
     if (query.trim()) {
-        params.set("q", query.trim());
+
+        params.set(
+            "q",
+            query.trim()
+        );
     }
 
     params.set(
@@ -181,11 +336,19 @@ async function searchHistory({
     );
 
     if (startDate) {
-        params.set("start_date", startDate);
+
+        params.set(
+            "start_date",
+            startDate
+        );
     }
 
     if (endDate) {
-        params.set("end_date", endDate);
+
+        params.set(
+            "end_date",
+            endDate
+        );
     }
 
     return apiRequest(
@@ -201,21 +364,36 @@ async function searchHistory({
 async function scanUploadedImage(file) {
 
     if (!file) {
-        throw new Error("Image file is required.");
+
+        throw new Error(
+            "Image file is required."
+        );
     }
 
-    const formData = new FormData();
+
+    // Wake Render before sending potentially expensive scan
+    await wakeBackend();
+
+
+    const formData =
+        new FormData();
 
     formData.append(
         "file",
-        file
+        file,
+        file.name || "uploaded_image.jpg"
     );
+
 
     return apiRequest(
         "/api/scan",
         {
             method: "POST",
-            body: formData
+
+            body: formData,
+
+            // AI analysis can take longer
+            timeout: 180000
         }
     );
 }
@@ -228,10 +406,18 @@ async function scanUploadedImage(file) {
 async function detectCameraFrame(imageBlob) {
 
     if (!imageBlob) {
-        throw new Error("Camera frame is required.");
+
+        throw new Error(
+            "Camera frame is required."
+        );
     }
 
-    const formData = new FormData();
+
+    await wakeBackend();
+
+
+    const formData =
+        new FormData();
 
     formData.append(
         "file",
@@ -239,11 +425,15 @@ async function detectCameraFrame(imageBlob) {
         "camera_frame.jpg"
     );
 
+
     return apiRequest(
         "/api/camera/detect",
         {
             method: "POST",
-            body: formData
+
+            body: formData,
+
+            timeout: 120000
         }
     );
 }
@@ -256,10 +446,18 @@ async function detectCameraFrame(imageBlob) {
 async function scanCameraFrame(imageBlob) {
 
     if (!imageBlob) {
-        throw new Error("Camera image is required.");
+
+        throw new Error(
+            "Camera image is required."
+        );
     }
 
-    const formData = new FormData();
+
+    await wakeBackend();
+
+
+    const formData =
+        new FormData();
 
     formData.append(
         "file",
@@ -267,11 +465,15 @@ async function scanCameraFrame(imageBlob) {
         "camera_capture.jpg"
     );
 
+
     return apiRequest(
         "/api/camera/scan",
         {
             method: "POST",
-            body: formData
+
+            body: formData,
+
+            timeout: 180000
         }
     );
 }
@@ -289,6 +491,9 @@ window.apiRequest =
 
 window.getHealth =
     getHealth;
+
+window.wakeBackend =
+    wakeBackend;
 
 window.getDashboardStats =
     getDashboardStats;
@@ -314,6 +519,10 @@ window.detectCameraFrame =
 window.scanCameraFrame =
     scanCameraFrame;
 
+
+// ============================================================
+// READY
+// ============================================================
 
 console.log(
     "AI Sentinel API ready:",

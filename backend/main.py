@@ -13,10 +13,7 @@ from backend.api.stats import router as stats_router
 
 app = FastAPI(
     title="Hardhik's AI Recognition/Monitoring System",
-    description=(
-        "AI-powered multi-object recognition "
-        "and monitoring system"
-    ),
+    description="AI-powered multi-object recognition and monitoring system",
     version="1.0.0",
 )
 
@@ -25,39 +22,31 @@ app = FastAPI(
 # CORS CONFIGURATION
 # ============================================================
 
+# Local development origins
+LOCAL_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+
 app.add_middleware(
     CORSMiddleware,
+
+    # Local development + permanent Vercel production URL
     allow_origins=[
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
+        *LOCAL_ORIGINS,
         "https://ai-sentinel-ashy.vercel.app",
     ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
-
-app.add_middleware(
-    CORSMiddleware,
-
-    # Local development
-    allow_origins=LOCAL_ORIGINS,
-
-    # Allow HTTPS deployments under vercel.app.
-    #
-    # Example:
-    # https://ai-sentinel-r8efk1aot-hardhik1.vercel.app
+    # Also support Vercel preview deployments
     allow_origin_regex=r"https://[a-zA-Z0-9-]+\.vercel\.app",
 
-    # Your frontend does not currently require cross-origin
-    # cookies for these API requests.
+    # We are not using cross-origin browser cookies
     allow_credentials=False,
 
-    # Allow GET, POST, DELETE, OPTIONS, etc.
+    # GET, POST, DELETE, OPTIONS, etc.
     allow_methods=["*"],
 
-    # Allow browser request headers.
+    # Allow required browser headers
     allow_headers=["*"],
 )
 
@@ -78,12 +67,10 @@ app.include_router(stats_router)
 
 @app.get("/")
 async def root():
-
     return {
         "project": "Hardhik's AI Recognition/Monitoring System",
         "status": "online",
         "version": "1.0.0",
-
         "features": {
             "image_scanner": "ready",
             "camera_scanner": "ready",
@@ -101,21 +88,16 @@ async def root():
 
 @app.get("/api/health")
 async def health_check():
-
     return {
         "status": "healthy",
         "backend": "online",
-
         "opencv": "ready",
         "yolo": "ready",
         "gemini": "ready",
-
         "database": "ready",
         "supabase": "ready",
-
         "cloud_storage": "ready",
         "cloudinary": "ready",
-
         "camera_api": "ready",
         "history_api": "ready",
         "stats_api": "ready",
