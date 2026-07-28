@@ -22,6 +22,47 @@ app = FastAPI(
 
 
 # ============================================================
+# CORS CONFIGURATION
+# ============================================================
+
+# Local development origins.
+#
+# Production/preview Vercel deployments are handled by
+# allow_origin_regex below.
+
+LOCAL_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+
+    # Local development
+    allow_origins=LOCAL_ORIGINS,
+
+    # Allow HTTPS deployments under vercel.app.
+    #
+    # Example:
+    # https://ai-sentinel-r8efk1aot-hardhik1.vercel.app
+    allow_origin_regex=r"https://[a-zA-Z0-9-]+\.vercel\.app",
+
+    # Your frontend does not currently require cross-origin
+    # cookies for these API requests.
+    allow_credentials=False,
+
+    # Allow GET, POST, DELETE, OPTIONS, etc.
+    allow_methods=["*"],
+
+    # Allow browser request headers.
+    allow_headers=["*"],
+)
+
+
+# ============================================================
 # CONNECT API ROUTERS
 # ============================================================
 
@@ -32,22 +73,6 @@ app.include_router(stats_router)
 
 
 # ============================================================
-# CORS CONFIGURATION
-# ============================================================
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-# ============================================================
 # ROOT ENDPOINT
 # ============================================================
 
@@ -55,33 +80,17 @@ app.add_middleware(
 async def root():
 
     return {
-        "project":
-            "Hardhik's AI Recognition/Monitoring System",
-
-        "status":
-            "online",
-
-        "version":
-            "1.0.0",
+        "project": "Hardhik's AI Recognition/Monitoring System",
+        "status": "online",
+        "version": "1.0.0",
 
         "features": {
-            "image_scanner":
-                "ready",
-
-            "camera_scanner":
-                "ready",
-
-            "live_detection":
-                "ready",
-
-            "scan_history":
-                "ready",
-
-            "history_search":
-                "ready",
-
-            "dashboard_statistics":
-                "ready",
+            "image_scanner": "ready",
+            "camera_scanner": "ready",
+            "live_detection": "ready",
+            "scan_history": "ready",
+            "history_search": "ready",
+            "dashboard_statistics": "ready",
         },
     }
 
@@ -94,40 +103,20 @@ async def root():
 async def health_check():
 
     return {
+        "status": "healthy",
+        "backend": "online",
 
-        "status":
-            "healthy",
+        "opencv": "ready",
+        "yolo": "ready",
+        "gemini": "ready",
 
-        "backend":
-            "online",
+        "database": "ready",
+        "supabase": "ready",
 
-        "opencv":
-            "ready",
+        "cloud_storage": "ready",
+        "cloudinary": "ready",
 
-        "yolo":
-            "ready",
-
-        "gemini":
-            "ready",
-
-        "database":
-            "ready",
-
-        "supabase":
-            "ready",
-
-        "cloud_storage":
-            "ready",
-
-        "cloudinary":
-            "ready",
-
-        "camera_api":
-            "ready",
-
-        "history_api":
-            "ready",
-
-        "stats_api":
-            "ready",
+        "camera_api": "ready",
+        "history_api": "ready",
+        "stats_api": "ready",
     }
