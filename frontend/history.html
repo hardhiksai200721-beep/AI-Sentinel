@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Sentinel recognition and monitoring scan history.">
+    <meta name="theme-color" content="#050506">
+    <title>AI Sentinel | Scan History</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body data-page="history">
+
+<div class="background-effects">
+    <div class="background-grid"></div>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-noise"></div>
+</div>
+
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+    <a href="./index.html" class="sidebar-brand">
+        <div class="brand-icon">AI</div>
+        <div class="brand-text">
+            <span>NEURAL SECURITY</span>
+            <strong>AI SENTINEL</strong>
+        </div>
+    </a>
+
+    <nav class="sidebar-nav">
+        <a href="./index.html" class="nav-link"><span class="nav-icon">◇</span><span>Dashboard</span></a>
+        <a href="./scanner.html" class="nav-link"><span class="nav-icon">◎</span><span>Scanner</span></a>
+        <a href="./camera.html" class="nav-link"><span class="nav-icon">◉</span><span>Camera</span></a>
+        <a href="./history.html" class="nav-link active" aria-current="page"><span class="nav-icon">⌁</span><span>History</span></a>
+    </nav>
+
+    <div class="sidebar-system">
+        <span class="sidebar-label">INTELLIGENCE DATABASE</span>
+        <div class="sidebar-system-row"><span>Supabase</span><strong id="historyDatabaseStatus">CHECKING</strong></div>
+        <div class="sidebar-system-row"><span>Backend</span><strong id="historyBackendStatus">CHECKING</strong></div>
+    </div>
+
+    <div class="sidebar-footer">
+        <span>INTELLIGENCE</span>
+        <strong>ARCHIVE MODULE</strong>
+    </div>
+</aside>
+
+<main class="main-content">
+    <header class="topbar">
+        <div class="topbar-left">
+            <button id="menuButton" class="menu-button" type="button" aria-label="Open navigation">☰</button>
+            <div class="topbar-title">
+                <span>AI SENTINEL</span>
+                <strong>Intelligence Archive</strong>
+            </div>
+        </div>
+
+        <div class="topbar-actions">
+            <a href="./camera.html" class="secondary-button">Live Camera</a>
+            <div id="globalBackendChip" class="backend-status">
+                <span class="status-dot"></span><span>BACKEND</span><strong id="backendStatus">CHECKING</strong>
+            </div>
+        </div>
+    </header>
+
+    <div class="history-camera-page">
+        <section class="history-camera-hero">
+            <div>
+                <span class="eyebrow">INTELLIGENCE DATABASE</span>
+                <h1>Scan <span>History</span></h1>
+                <p>Explore previous AI recognition events, camera captures, YOLO detections and Gemini visual intelligence records.</p>
+            </div>
+
+            <div class="history-database-badge">
+                <div class="history-database-icon">DB</div>
+                <div>
+                    <span>DATABASE STATUS</span>
+                    <strong id="databaseHeroStatus">CHECKING</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-camera-workspace">
+            <div class="history-camera-panel glass-panel">
+                <div class="history-camera-panel-header">
+                    <div>
+                        <span class="eyebrow">ARCHIVE</span>
+                        <h2>Recognition Records</h2>
+                    </div>
+                    <button id="refreshHistoryButton" class="secondary-button" type="button">↻ Refresh</button>
+                </div>
+
+                <div class="history-camera-filters">
+                    <input id="historySearchInput" class="history-camera-search" type="search" placeholder="Search scan ID, source, labels or AI analysis…">
+                    <select id="historyPeriodFilter" class="history-camera-select" aria-label="Period">
+                        <option value="all">All time</option>
+                        <option value="today">Today</option>
+                        <option value="7">Last 7 days</option>
+                        <option value="30">Last 30 days</option>
+                    </select>
+                    <select id="historySourceFilter" class="history-camera-select" aria-label="Source">
+                        <option value="all">All sources</option>
+                        <option value="upload">Upload</option>
+                        <option value="camera">Camera</option>
+                    </select>
+                    <button id="historySearchButton" class="primary-button" type="button">Search</button>
+                </div>
+
+                <div id="historyError" class="history-camera-error" hidden>
+                    <strong>HISTORY ERROR</strong>
+                    <p id="historyErrorText">Unable to retrieve scan history.</p>
+                </div>
+
+                <div id="historyLoading" class="history-camera-state" hidden>
+                    <div class="history-loader"></div>
+                    <strong>ACCESSING INTELLIGENCE ARCHIVE</strong>
+                    <span>Retrieving saved scan records.</span>
+                </div>
+
+                <div id="historyEmpty" class="history-camera-state" hidden>
+                    <div class="history-empty-icon">◇</div>
+                    <strong>No Scan Records</strong>
+                    <span>Run an image or camera scan and the saved record will appear here.</span>
+                </div>
+
+                <div id="historyGrid" class="history-camera-grid" aria-live="polite"></div>
+            </div>
+
+            <aside class="history-telemetry-panel glass-panel">
+                <div class="history-camera-panel-header">
+                    <div>
+                        <span class="eyebrow">TELEMETRY</span>
+                        <h2>Archive Status</h2>
+                    </div>
+                    <span class="history-telemetry-chip">LIVE DATA</span>
+                </div>
+
+                <div class="history-telemetry-grid">
+                    <article><span>TOTAL SCANS</span><strong id="historyTotalScans">0</strong><small>Stored records</small></article>
+                    <article><span>UPLOADS</span><strong id="historyUploadScans">0</strong><small>Image scans</small></article>
+                    <article><span>CAMERA</span><strong id="historyCameraScans">0</strong><small>Camera scans</small></article>
+                    <article><span>OBJECTS</span><strong id="historyObjectCount">0</strong><small>YOLO detections</small></article>
+                </div>
+
+                <div class="history-system-status">
+                    <div><span>Supabase database</span><strong id="historyDatabaseTelemetry">CHECKING</strong></div>
+                    <div><span>API backend</span><strong id="historyBackendTelemetry">CHECKING</strong></div>
+                </div>
+            </aside>
+        </section>
+    </div>
+</main>
+
+<div id="historyModal" class="history-modal" hidden>
+    <div id="historyModalBackdrop" class="history-modal-backdrop"></div>
+    <article class="history-modal-panel" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle">
+        <header class="history-modal-header">
+            <div>
+                <span class="eyebrow">SCAN INTELLIGENCE</span>
+                <h2 id="historyModalTitle">Detailed Record</h2>
+            </div>
+            <button id="closeHistoryModal" class="history-modal-close" type="button" aria-label="Close">×</button>
+        </header>
+
+        <div class="history-modal-content">
+            <section class="history-detail-image-panel">
+                <div class="history-detail-image-wrap">
+                    <img id="historyDetailImage" alt="Saved AI scan">
+                </div>
+                <a id="historyCloudLink" class="secondary-button" target="_blank" rel="noopener noreferrer">Open Cloud Image ↗</a>
+            </section>
+
+            <section class="history-detail-data">
+                <div class="history-detail-summary">
+                    <article><span>SOURCE</span><strong id="detailSource">-</strong></article>
+                    <article><span>OBJECTS</span><strong id="detailObjectCount">0</strong></article>
+                    <article><span>IMAGE SIZE</span><strong id="detailImageSize">-</strong></article>
+                </div>
+
+                <div class="history-detail-block">
+                    <span class="eyebrow">DATABASE</span>
+                    <h3>Record Information</h3>
+                    <div id="historyDatabaseDetails"></div>
+                </div>
+
+                <div class="history-detail-block">
+                    <span class="eyebrow">YOLO</span>
+                    <h3>Detected Objects</h3>
+                    <div id="historyYoloDetails"></div>
+                </div>
+
+                <div class="history-detail-block">
+                    <span class="eyebrow">GEMINI VISION</span>
+                    <h3>AI Analysis</h3>
+                    <div id="historyGeminiDetails"></div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="history-modal-footer">
+            <span id="historyModalScanId">-</span>
+            <button id="deleteHistoryRecordButton" class="danger-button" type="button">Delete Record</button>
+        </footer>
+    </article>
+</div>
+
+<div id="deleteHistoryDialog" class="history-modal" hidden>
+    <div class="history-modal-backdrop"></div>
+    <article class="delete-confirmation-card" role="dialog" aria-modal="true" aria-labelledby="deleteHistoryTitle">
+        <div class="delete-warning-icon">!</div>
+        <span class="eyebrow">DATABASE ACTION</span>
+        <h2 id="deleteHistoryTitle">Delete Scan?</h2>
+        <p>This permanently deletes the selected scan record. This action cannot be undone.</p>
+        <div class="delete-confirmation-actions">
+            <button id="cancelHistoryDelete" class="secondary-button" type="button">Cancel</button>
+            <button id="confirmHistoryDelete" class="danger-button" type="button">Delete</button>
+        </div>
+    </article>
+</div>
+
+<script src="./js/api.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/history.js"></script>
+</body>
+</html>

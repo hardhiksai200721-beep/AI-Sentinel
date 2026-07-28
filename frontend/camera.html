@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AI Sentinel live computer vision camera."
+    >
+
+    <title>AI Sentinel | Live Camera</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+</head>
+
+
+<body data-page="camera">
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-effects">
+        <div class="background-grid"></div>
+        <div class="background-glow glow-one"></div>
+        <div class="background-glow glow-two"></div>
+        <div class="background-noise"></div>
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <a
+            href="./index.html"
+            class="sidebar-brand"
+        >
+
+            <div class="brand-icon">
+                AI
+            </div>
+
+            <div class="brand-text">
+
+                <span>
+                    NEURAL SECURITY
+                </span>
+
+                <strong>
+                    AI SENTINEL
+                </strong>
+
+            </div>
+
+        </a>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="./index.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">◇</span>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="./scanner.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">◎</span>
+                <span>Scanner</span>
+            </a>
+
+
+            <a
+                href="./camera.html"
+                class="nav-link active"
+            >
+                <span class="nav-icon">◉</span>
+                <span>Camera</span>
+            </a>
+
+
+            <a
+                href="./history.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">⌁</span>
+                <span>History</span>
+            </a>
+
+        </nav>
+
+
+        <!-- SYSTEM -->
+
+        <div class="sidebar-system">
+
+            <span class="sidebar-label">
+                LIVE VISION
+            </span>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Camera
+                </span>
+
+                <strong id="sidebarCameraStatus">
+                    OFFLINE
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    OpenCV
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    YOLO
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Gemini
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <span>
+                COMPUTER VISION
+            </span>
+
+            <strong>
+                CAMERA MODULE
+            </strong>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Open navigation"
+                >
+                    ☰
+                </button>
+
+
+                <div class="topbar-title">
+
+                    <span>
+                        AI SENTINEL
+                    </span>
+
+                    <strong>
+                        Live Vision Terminal
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    href="./history.html"
+                    class="topbar-link"
+                >
+                    Camera History
+                </a>
+
+
+                <div
+                    class="backend-status"
+                    id="backendStatus"
+                >
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        BACKEND
+                    </span>
+
+                    <strong>
+                        CHECKING
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content-wrapper">
+
+
+            <!-- =============================================
+                 PAGE INTRO
+            ============================================== -->
+
+            <section class="page-intro">
+
+                <div>
+
+                    <span class="eyebrow">
+                        REAL-TIME COMPUTER VISION
+                    </span>
+
+                    <h1>
+                        Live AI
+                        <span>Camera</span>
+                    </h1>
+
+                    <p>
+                        Activate your webcam for live YOLO object
+                        detection. Capture a frame when you want
+                        the complete Gemini analysis, compressed
+                        cloud storage and permanent Supabase record.
+                    </p>
+
+                </div>
+
+
+                <div class="camera-live-badge">
+
+                    <span
+                        class="camera-live-dot"
+                        id="cameraLiveDot"
+                    ></span>
+
+                    <div>
+
+                        <span>
+                            CAMERA STATUS
+                        </span>
+
+                        <strong id="cameraStatusText">
+                            OFFLINE
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 CAMERA WORKSPACE
+            ============================================== -->
+
+            <section class="camera-workspace">
+
+
+                <!-- =========================================
+                     CAMERA VIEW
+                ========================================== -->
+
+                <div class="camera-main-panel glass-panel">
+
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                LIVE INPUT
+                            </span>
+
+                            <h2>
+                                Camera Feed
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="camera-mode-chip"
+                            id="cameraModeChip"
+                        >
+                            STANDBY
+                        </span>
+
+                    </div>
+
+
+                    <!-- CAMERA STAGE -->
+
+                    <div
+                        class="camera-stage"
+                        id="cameraStage"
+                    >
+
+
+                        <!-- EMPTY STATE -->
+
+                        <div
+                            class="camera-empty-state"
+                            id="cameraEmptyState"
+                        >
+
+                            <div class="camera-empty-icon">
+                                ◉
+                            </div>
+
+
+                            <h3>
+                                Camera Offline
+                            </h3>
+
+
+                            <p>
+                                Start the camera to activate
+                                the live computer vision feed.
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                id="startCameraButton"
+                            >
+                                START CAMERA
+                            </button>
+
+                        </div>
+
+
+                        <!-- VIDEO -->
+
+                        <video
+                            id="cameraVideo"
+                            autoplay
+                            playsinline
+                            muted
+                            hidden
+                        ></video>
+
+
+                        <!-- YOLO BOUNDING BOXES -->
+
+                        <div
+                            class="camera-overlay"
+                            id="cameraOverlay"
+                        ></div>
+
+
+                        <!-- SCANNING EFFECT -->
+
+                        <div
+                            class="camera-scan-line"
+                            id="cameraScanLine"
+                            hidden
+                        ></div>
+
+
+                        <!-- CORNERS -->
+
+                        <div class="camera-corner camera-corner-tl"></div>
+                        <div class="camera-corner camera-corner-tr"></div>
+                        <div class="camera-corner camera-corner-bl"></div>
+                        <div class="camera-corner camera-corner-br"></div>
+
+
+                        <!-- LIVE HUD -->
+
+                        <div
+                            class="camera-hud"
+                            id="cameraHud"
+                            hidden
+                        >
+
+                            <div>
+
+                                <span>
+                                    LIVE YOLO
+                                </span>
+
+                                <strong id="liveObjectCount">
+                                    0 OBJECTS
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    RESOLUTION
+                                </span>
+
+                                <strong id="cameraResolution">
+                                    -
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HIDDEN CAPTURE CANVAS -->
+
+                    <canvas
+                        id="cameraCanvas"
+                        hidden
+                    ></canvas>
+
+
+                    <!-- CAMERA ACTIONS -->
+
+                    <div class="camera-controls">
+
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            id="captureButton"
+                            disabled
+                        >
+                            ◎ FULL AI SCAN
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="toggleDetectionButton"
+                            disabled
+                        >
+                            YOLO: ON
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="danger-button"
+                            id="stopCameraButton"
+                            disabled
+                        >
+                            STOP CAMERA
+                        </button>
+
+                    </div>
+
+
+                    <!-- ERROR -->
+
+                    <div
+                        class="scanner-error"
+                        id="cameraError"
+                        hidden
+                    >
+
+                        <span>
+                            !
+                        </span>
+
+                        <p id="cameraErrorText">
+                            Camera error
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     LIVE DETECTION PANEL
+                ========================================== -->
+
+                <aside class="camera-detection-panel glass-panel">
+
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                YOLO TELEMETRY
+                            </span>
+
+                            <h2>
+                                Live Detection
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="result-chip"
+                            id="detectionStatusChip"
+                        >
+                            WAITING
+                        </span>
+
+                    </div>
+
+
+                    <!-- LIVE STATS -->
+
+                    <div class="camera-stat-grid">
+
+
+                        <div class="camera-stat-card">
+
+                            <span>
+                                OBJECTS
+                            </span>
+
+                            <strong id="detectedObjectCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="camera-stat-card">
+
+                            <span>
+                                FRAMES
+                            </span>
+
+                            <strong id="analyzedFrameCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OBJECT LIST -->
+
+                    <div
+                        class="camera-object-list"
+                        id="cameraObjectList"
+                    >
+
+                        <div class="empty-result-message">
+
+                            Start the camera to begin
+                            live object detection.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LIVE PIPELINE -->
+
+                    <div class="camera-mini-pipeline">
+
+                        <div>
+
+                            <span class="pipeline-mini-icon">
+                                CV
+                            </span>
+
+                            <div>
+                                <span>FRAME</span>
+                                <strong>OpenCV</strong>
+                            </div>
+
+                            <i class="pipeline-ready-dot"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="pipeline-mini-icon">
+                                YO
+                            </span>
+
+                            <div>
+                                <span>DETECTION</span>
+                                <strong>YOLO</strong>
+                            </div>
+
+                            <i class="pipeline-ready-dot"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="pipeline-mini-icon">
+                                AI
+                            </span>
+
+                            <div>
+                                <span>FULL SCAN</span>
+                                <strong>Gemini</strong>
+                            </div>
+
+                            <i class="pipeline-ready-dot"></i>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </section>
+
+
+            <!-- =============================================
+                 FULL SCAN PROCESSING
+            ============================================== -->
+
+            <section
+                class="scan-processing glass-panel"
+                id="cameraProcessing"
+                hidden
+            >
+
+                <div class="processing-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            DEEP VISION ANALYSIS
+                        </span>
+
+                        <h2>
+                            Processing captured frame...
+                        </h2>
+
+                    </div>
+
+
+                    <strong id="cameraProcessingPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="processing-progress">
+
+                    <div
+                        class="processing-progress-bar"
+                        id="cameraProcessingBar"
+                    ></div>
+
+                </div>
+
+
+                <p id="cameraProcessingMessage">
+                    Capturing camera frame...
+                </p>
+
+            </section>
+
+
+            <!-- =============================================
+                 DETAILED SCAN RESULT
+            ============================================== -->
+
+            <section
+                class="camera-scan-results"
+                id="cameraScanResults"
+                hidden
+            >
+
+
+                <div class="result-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CAMERA ANALYSIS COMPLETE
+                        </span>
+
+                        <h2>
+                            Detailed Vision Report
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearCameraResultButton"
+                    >
+                        CLEAR RESULT
+                    </button>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="result-summary-grid">
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            ◎
+                        </span>
+
+                        <div>
+
+                            <span>
+                                OBJECTS
+                            </span>
+
+                            <strong id="cameraResultObjectCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            AI
+                        </span>
+
+                        <div>
+
+                            <span>
+                                AI RESULTS
+                            </span>
+
+                            <strong id="cameraResultAICount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            ☁
+                        </span>
+
+                        <div>
+
+                            <span>
+                                CLOUD
+                            </span>
+
+                            <strong id="cameraCloudStatus">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            DB
+                        </span>
+
+                        <div>
+
+                            <span>
+                                DATABASE
+                            </span>
+
+                            <strong id="cameraDatabaseStatus">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- CAPTURED FRAME -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                CAPTURED SOURCE
+                            </span>
+
+                            <h3>
+                                Analyzed Frame
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="camera-result-image-wrap">
+
+                        <img
+                            id="cameraResultImage"
+                            alt="Captured camera frame"
+                        >
+
+                        <div
+                            class="bounding-box-layer"
+                            id="cameraResultBoundingBoxes"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- YOLO RESULT -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                COMPUTER VISION
+                            </span>
+
+                            <h3>
+                                Detected Objects
+                            </h3>
+
+                        </div>
+
+
+                        <span
+                            class="result-chip"
+                            id="cameraResultYoloChip"
+                        >
+                            0 OBJECTS
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="yolo-object-list camera-result-object-list"
+                        id="cameraResultObjects"
+                    ></div>
+
+                </article>
+
+
+                <!-- GEMINI RESULT -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                GEMINI VISION
+                            </span>
+
+                            <h3>
+                                AI Intelligence
+                            </h3>
+
+                        </div>
+
+
+                        <span class="result-chip">
+                            AI
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="gemini-results"
+                        id="cameraGeminiResults"
+                    ></div>
+
+                </article>
+
+
+                <!-- STORAGE -->
+
+                <div class="storage-confirmation-grid">
+
+
+                    <article
+                        class="storage-confirmation-card glass-panel"
+                        id="cameraCloudinaryResult"
+                    >
+
+                        <div class="storage-confirmation-icon">
+                            ☁
+                        </div>
+
+
+                        <div class="storage-confirmation-content">
+
+                            <span>
+                                CLOUD STORAGE
+                            </span>
+
+                            <h3>
+                                Cloudinary
+                            </h3>
+
+                            <p>
+                                Waiting for scan.
+                            </p>
+
+                        </div>
+
+
+                        <div class="storage-confirmation-status">
+                            —
+                        </div>
+
+                    </article>
+
+
+                    <article
+                        class="storage-confirmation-card glass-panel"
+                        id="cameraSupabaseResult"
+                    >
+
+                        <div class="storage-confirmation-icon">
+                            DB
+                        </div>
+
+
+                        <div class="storage-confirmation-content">
+
+                            <span>
+                                DATABASE RECORD
+                            </span>
+
+                            <h3>
+                                Supabase
+                            </h3>
+
+                            <p>
+                                Waiting for scan.
+                            </p>
+
+                        </div>
+
+
+                        <div class="storage-confirmation-status">
+                            —
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- TECHNICAL DETAILS -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                CAPTURE TELEMETRY
+                            </span>
+
+                            <h3>
+                                Image Information
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="technical-grid">
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                ORIGINAL
+                            </span>
+
+                            <strong id="cameraOriginalSize">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                COMPRESSED
+                            </span>
+
+                            <strong id="cameraCompressedSize">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                QUALITY
+                            </span>
+
+                            <strong id="cameraCompressionQuality">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                RESOLUTION
+                            </span>
+
+                            <strong id="cameraResultResolution">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DATABASE ID -->
+
+                <article class="scan-record-panel glass-panel">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SUPABASE RECORD
+                        </span>
+
+                        <strong id="cameraResultScanId">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="./history.html"
+                        class="secondary-button"
+                    >
+                        OPEN HISTORY
+                    </a>
+
+                </article>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    >
+
+        <div
+            class="app-toast"
+            id="toast"
+        >
+
+            <span
+                class="toast-icon"
+                id="toastIcon"
+            >
+                ◉
+            </span>
+
+            <span id="toastMessage">
+                System notification
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="./js/api.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/camera.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AI Sentinel intelligent image recognition scanner."
+    >
+
+    <title>AI Sentinel | Scanner</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+</head>
+
+
+<body data-page="scanner">
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-effects">
+        <div class="background-grid"></div>
+        <div class="background-glow glow-one"></div>
+        <div class="background-glow glow-two"></div>
+        <div class="background-noise"></div>
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <a
+            href="./index.html"
+            class="sidebar-brand"
+        >
+
+            <div class="brand-icon">
+                AI
+            </div>
+
+            <div class="brand-text">
+
+                <span>
+                    NEURAL SECURITY
+                </span>
+
+                <strong>
+                    AI SENTINEL
+                </strong>
+
+            </div>
+
+        </a>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="./index.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">◇</span>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="./scanner.html"
+                class="nav-link active"
+            >
+                <span class="nav-icon">◎</span>
+                <span>Scanner</span>
+            </a>
+
+
+            <a
+                href="./camera.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">◉</span>
+                <span>Camera</span>
+            </a>
+
+
+            <a
+                href="./history.html"
+                class="nav-link"
+            >
+                <span class="nav-icon">⌁</span>
+                <span>History</span>
+            </a>
+
+        </nav>
+
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="sidebar-system">
+
+            <span class="sidebar-label">
+                SCANNER PIPELINE
+            </span>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    OpenCV
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    YOLO
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Gemini
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Cloud
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Database
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <span>
+                IMAGE RECOGNITION
+            </span>
+
+            <strong>
+                SCANNER MODULE
+            </strong>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Open navigation"
+                >
+                    ☰
+                </button>
+
+
+                <div class="topbar-title">
+
+                    <span>
+                        AI SENTINEL
+                    </span>
+
+                    <strong>
+                        Neural Image Scanner
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    href="./history.html"
+                    class="topbar-link"
+                >
+                    Scan History
+                </a>
+
+
+                <div
+                    class="backend-status"
+                    id="backendStatus"
+                >
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        BACKEND
+                    </span>
+
+                    <strong>
+                        CHECKING
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content-wrapper">
+
+
+            <!-- =============================================
+                 PAGE HEADER
+            ============================================== -->
+
+            <section class="page-intro scanner-page-intro">
+
+                <div>
+
+                    <span class="eyebrow">
+                        COMPUTER VISION TERMINAL
+                    </span>
+
+                    <h1>
+                        Neural Image
+                        <span>Scanner</span>
+                    </h1>
+
+                    <p>
+                        Upload an image and run it through the
+                        complete AI Sentinel recognition pipeline.
+                        YOLO detects objects, Gemini performs
+                        visual intelligence, Cloudinary stores the
+                        compressed image and Supabase saves the
+                        scan record.
+                    </p>
+
+                </div>
+
+
+                <div class="scanner-core-mini">
+
+                    <div class="scanner-core-ring"></div>
+
+                    <div class="scanner-core-center">
+                        ◎
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 SCANNER WORKSPACE
+            ============================================== -->
+
+            <section class="scanner-workspace">
+
+
+                <!-- =========================================
+                     LEFT SIDE
+                ========================================== -->
+
+                <div class="scanner-input-panel glass-panel">
+
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                INPUT SOURCE
+                            </span>
+
+                            <h2>
+                                Image Upload
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="scanner-file-status"
+                            id="fileStatus"
+                        >
+                            NO IMAGE
+                        </span>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         UPLOAD BOX
+                    ====================================== -->
+
+                    <div
+                        class="upload-box"
+                        id="uploadBox"
+                    >
+
+                        <input
+                            type="file"
+                            id="fileInput"
+                            accept="image/jpeg,image/png,image/webp"
+                            hidden
+                        >
+
+
+                        <!-- EMPTY UPLOAD STATE -->
+
+                        <div
+                            class="upload-empty-state"
+                            id="uploadEmptyState"
+                        >
+
+                            <div class="upload-icon-wrap">
+
+                                <span class="upload-icon">
+                                    ↑
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                Drop Image Here
+                            </h3>
+
+
+                            <p>
+                                Drag and drop an image or click
+                                below to select a file.
+                            </p>
+
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                id="browseButton"
+                            >
+                                SELECT IMAGE
+                            </button>
+
+
+                            <div class="upload-rules">
+
+                                <span>
+                                    JPG
+                                </span>
+
+                                <span>
+                                    PNG
+                                </span>
+
+                                <span>
+                                    WEBP
+                                </span>
+
+                                <span>
+                                    MAX 15 MB
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- IMAGE PREVIEW -->
+
+                        <div
+                            class="image-preview-container"
+                            id="imagePreviewContainer"
+                            hidden
+                        >
+
+                            <div class="preview-frame">
+
+                                <img
+                                    id="imagePreview"
+                                    alt="Selected image preview"
+                                >
+
+
+                                <div class="preview-scan-line"></div>
+
+                                <div class="preview-corner corner-top-left"></div>
+
+                                <div class="preview-corner corner-top-right"></div>
+
+                                <div class="preview-corner corner-bottom-left"></div>
+
+                                <div class="preview-corner corner-bottom-right"></div>
+
+                            </div>
+
+
+                            <div class="preview-file-info">
+
+                                <div>
+
+                                    <span>
+                                        FILE
+                                    </span>
+
+                                    <strong id="selectedFileName">
+                                        -
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        SIZE
+                                    </span>
+
+                                    <strong id="selectedFileSize">
+                                        -
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         ACTION BUTTONS
+                    ====================================== -->
+
+                    <div class="scanner-actions">
+
+                        <button
+                            type="button"
+                            class="primary-button scan-action-button"
+                            id="scanButton"
+                            disabled
+                        >
+
+                            <span>
+                                ◎
+                            </span>
+
+                            START AI SCAN
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="resetButton"
+                        >
+                            RESET
+                        </button>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         ERROR
+                    ====================================== -->
+
+                    <div
+                        class="scanner-error"
+                        id="scannerError"
+                        hidden
+                    >
+
+                        <span>
+                            !
+                        </span>
+
+                        <p id="scannerErrorText">
+                            Scanner error
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     RIGHT SIDE - PIPELINE
+                ========================================== -->
+
+                <aside class="scanner-pipeline-panel glass-panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                LIVE PIPELINE
+                            </span>
+
+                            <h2>
+                                Processing Core
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="scanner-pipeline">
+
+
+                        <!-- OPENCV -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineOpenCV"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                CV
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    IMAGE PROCESSING
+                                </span>
+
+                                <strong>
+                                    OpenCV
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="pipeline-line"></div>
+
+
+                        <!-- YOLO -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineYOLO"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                YO
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    OBJECT DETECTION
+                                </span>
+
+                                <strong>
+                                    YOLO
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="pipeline-line"></div>
+
+
+                        <!-- GEMINI -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineGemini"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                AI
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    AI ANALYSIS
+                                </span>
+
+                                <strong>
+                                    Gemini
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="pipeline-line"></div>
+
+
+                        <!-- COMPRESSION -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineCompression"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                CP
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    OPTIMIZATION
+                                </span>
+
+                                <strong>
+                                    Compression
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="pipeline-line"></div>
+
+
+                        <!-- CLOUDINARY -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineCloudinary"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                CL
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    CLOUD STORAGE
+                                </span>
+
+                                <strong>
+                                    Cloudinary
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <div class="pipeline-line"></div>
+
+
+                        <!-- SUPABASE -->
+
+                        <div
+                            class="scanner-pipeline-item"
+                            id="pipelineSupabase"
+                        >
+
+                            <div class="pipeline-state-icon">
+                                DB
+                            </div>
+
+
+                            <div class="pipeline-state-info">
+
+                                <span>
+                                    DATABASE RECORD
+                                </span>
+
+                                <strong>
+                                    Supabase
+                                </strong>
+
+                            </div>
+
+
+                            <span class="pipeline-state-value">
+                                READY
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </section>
+
+
+            <!-- =============================================
+                 PROCESSING STATUS
+            ============================================== -->
+
+            <section
+                class="scan-processing glass-panel"
+                id="scanProcessing"
+                hidden
+            >
+
+                <div class="processing-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            NEURAL PROCESSING
+                        </span>
+
+                        <h2 id="processingTitle">
+                            Analyzing image...
+                        </h2>
+
+                    </div>
+
+
+                    <strong id="processingPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="processing-progress">
+
+                    <div
+                        class="processing-progress-bar"
+                        id="processingProgressBar"
+                    ></div>
+
+                </div>
+
+
+                <p id="processingMessage">
+                    Preparing image...
+                </p>
+
+            </section>
+
+
+            <!-- =============================================
+                 RESULTS
+            ============================================== -->
+
+            <section
+                class="scan-results"
+                id="scanResults"
+                hidden
+            >
+
+
+                <!-- RESULT HEADER -->
+
+                <div class="result-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ANALYSIS COMPLETE
+                        </span>
+
+                        <h2>
+                            Intelligence Report
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="newScanButton"
+                    >
+                        + NEW SCAN
+                    </button>
+
+                </div>
+
+
+                <!-- =========================================
+                     RESULT SUMMARY
+                ========================================== -->
+
+                <div class="result-summary-grid">
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            ◎
+                        </span>
+
+                        <div>
+
+                            <span>
+                                OBJECTS
+                            </span>
+
+                            <strong id="resultObjectCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            AI
+                        </span>
+
+                        <div>
+
+                            <span>
+                                AI RESULTS
+                            </span>
+
+                            <strong id="resultAIResultCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            CP
+                        </span>
+
+                        <div>
+
+                            <span>
+                                COMPRESSION
+                            </span>
+
+                            <strong id="resultCompression">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="result-summary-card glass-panel">
+
+                        <span class="result-summary-icon">
+                            DB
+                        </span>
+
+                        <div>
+
+                            <span>
+                                DATABASE
+                            </span>
+
+                            <strong id="resultDatabaseStatus">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- =========================================
+                     DETECTION PREVIEW
+                ========================================== -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                COMPUTER VISION
+                            </span>
+
+                            <h3>
+                                YOLO Detection
+                            </h3>
+
+                        </div>
+
+
+                        <span
+                            class="result-chip"
+                            id="yoloObjectCount"
+                        >
+                            0 OBJECTS
+                        </span>
+
+                    </div>
+
+
+                    <div class="detection-layout">
+
+
+                        <div
+                            class="detection-image-stage"
+                            id="detectionImageStage"
+                        >
+
+                            <img
+                                id="detectionImage"
+                                alt="YOLO detection result"
+                            >
+
+
+                            <div
+                                class="bounding-box-layer"
+                                id="boundingBoxLayer"
+                            ></div>
+
+                        </div>
+
+
+                        <div
+                            class="yolo-object-list"
+                            id="yoloObjects"
+                        >
+
+                            <div class="empty-result-message">
+                                No objects detected.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =========================================
+                     GEMINI
+                ========================================== -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                VISUAL INTELLIGENCE
+                            </span>
+
+                            <h3>
+                                Gemini Analysis
+                            </h3>
+
+                        </div>
+
+
+                        <span class="result-chip">
+                            AI
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="gemini-results"
+                        id="geminiResults"
+                    ></div>
+
+                </article>
+
+
+                <!-- =========================================
+                     STORAGE CONFIRMATION
+                ========================================== -->
+
+                <div class="storage-confirmation-grid">
+
+
+                    <!-- CLOUDINARY -->
+
+                    <article
+                        class="storage-confirmation-card glass-panel"
+                        id="cloudinaryResult"
+                    >
+
+                        <div class="storage-confirmation-icon">
+                            ☁
+                        </div>
+
+
+                        <div class="storage-confirmation-content">
+
+                            <span>
+                                CLOUD STORAGE
+                            </span>
+
+                            <h3>
+                                Cloudinary
+                            </h3>
+
+                            <p>
+                                Waiting for scan result.
+                            </p>
+
+                        </div>
+
+
+                        <div class="storage-confirmation-status">
+                            —
+                        </div>
+
+                    </article>
+
+
+                    <!-- SUPABASE -->
+
+                    <article
+                        class="storage-confirmation-card glass-panel"
+                        id="supabaseResult"
+                    >
+
+                        <div class="storage-confirmation-icon">
+                            DB
+                        </div>
+
+
+                        <div class="storage-confirmation-content">
+
+                            <span>
+                                DATABASE
+                            </span>
+
+                            <h3>
+                                Supabase
+                            </h3>
+
+                            <p>
+                                Waiting for scan result.
+                            </p>
+
+                        </div>
+
+
+                        <div class="storage-confirmation-status">
+                            —
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- =========================================
+                     TECHNICAL DATA
+                ========================================== -->
+
+                <article class="result-panel glass-panel">
+
+                    <div class="result-panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                IMAGE OPTIMIZATION
+                            </span>
+
+                            <h3>
+                                Compression Data
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="technical-grid">
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                ORIGINAL
+                            </span>
+
+                            <strong id="originalImageSize">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                COMPRESSED
+                            </span>
+
+                            <strong id="compressedImageSize">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                QUALITY
+                            </span>
+
+                            <strong id="compressionQuality">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="technical-item">
+
+                            <span>
+                                OUTPUT
+                            </span>
+
+                            <strong id="compressionDimensions">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =========================================
+                     SCAN RECORD
+                ========================================== -->
+
+                <article class="scan-record-panel glass-panel">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            RECORD IDENTIFIER
+                        </span>
+
+                        <strong id="resultScanId">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <a
+                        href="./history.html"
+                        class="secondary-button"
+                    >
+                        VIEW HISTORY
+                    </a>
+
+                </article>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    >
+
+        <div
+            class="app-toast"
+            id="toast"
+        >
+
+            <span
+                class="toast-icon"
+                id="toastIcon"
+            >
+                ◉
+            </span>
+
+            <span id="toastMessage">
+                System notification
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="./js/api.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/scanner.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="AI Sentinel intelligent recognition and monitoring system."
+    >
+
+    <title>AI Sentinel | Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+</head>
+
+
+<body data-page="dashboard">
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background-effects">
+
+        <div class="background-grid"></div>
+
+        <div class="background-glow glow-one"></div>
+
+        <div class="background-glow glow-two"></div>
+
+        <div class="background-noise"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <!-- BRAND -->
+
+        <a
+            href="./index.html"
+            class="sidebar-brand"
+        >
+
+            <div class="brand-icon">
+                AI
+            </div>
+
+            <div class="brand-text">
+
+                <span>
+                    NEURAL SECURITY
+                </span>
+
+                <strong>
+                    AI SENTINEL
+                </strong>
+
+            </div>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="./index.html"
+                class="nav-link active"
+            >
+
+                <span class="nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="./scanner.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ◎
+                </span>
+
+                <span>
+                    Scanner
+                </span>
+
+            </a>
+
+
+            <a
+                href="./camera.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ◉
+                </span>
+
+                <span>
+                    Camera
+                </span>
+
+            </a>
+
+
+            <a
+                href="./history.html"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ⌁
+                </span>
+
+                <span>
+                    History
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- SYSTEM -->
+
+        <div class="sidebar-system">
+
+            <span class="sidebar-label">
+                SYSTEM
+            </span>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    OpenCV
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    YOLO
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Gemini
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+
+            <div class="sidebar-system-row">
+
+                <span>
+                    Cloud
+                </span>
+
+                <strong>
+                    READY
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="sidebar-footer">
+
+            <span>
+                AI RECOGNITION SYSTEM
+            </span>
+
+            <strong>
+                VERSION 1.0.0
+            </strong>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Open navigation"
+                >
+                    ☰
+                </button>
+
+
+                <div class="topbar-title">
+
+                    <span>
+                        AI SENTINEL
+                    </span>
+
+                    <strong>
+                        Command Dashboard
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    type="button"
+                    class="topbar-refresh"
+                    id="refreshStatsButton"
+                >
+                    ↻ Refresh
+                </button>
+
+
+                <div
+                    class="backend-status"
+                    id="backendStatus"
+                >
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        BACKEND
+                    </span>
+
+                    <strong>
+                        CHECKING
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD CONTENT
+        ================================================== -->
+
+        <div class="content-wrapper">
+
+
+            <!-- =============================================
+                 HERO
+            ============================================== -->
+
+            <section class="dashboard-hero">
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        INTELLIGENT MONITORING PLATFORM
+                    </span>
+
+                    <h1>
+                        AI Vision
+                        <span>Command Center</span>
+                    </h1>
+
+                    <p>
+                        Monitor your recognition pipeline,
+                        analyze images, operate live computer
+                        vision and review intelligence records
+                        from one centralized interface.
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="./scanner.html"
+                            class="primary-button hero-button"
+                        >
+                            OPEN AI SCANNER
+                        </a>
+
+
+                        <a
+                            href="./camera.html"
+                            class="secondary-button hero-button"
+                        >
+                            LAUNCH CAMERA
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-pipeline">
+
+                        <span>
+                            OpenCV
+                        </span>
+
+                        <i>→</i>
+
+                        <span>
+                            YOLO
+                        </span>
+
+                        <i>→</i>
+
+                        <span>
+                            Gemini
+                        </span>
+
+                        <i>→</i>
+
+                        <span>
+                            Cloudinary
+                        </span>
+
+                        <i>→</i>
+
+                        <span>
+                            Supabase
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 3D CORE -->
+
+                <div class="hero-core">
+
+                    <div class="core-scene">
+
+                        <div class="core-orbit orbit-one"></div>
+
+                        <div class="core-orbit orbit-two"></div>
+
+                        <div class="core-orbit orbit-three"></div>
+
+
+                        <div class="core-particle particle-one"></div>
+
+                        <div class="core-particle particle-two"></div>
+
+                        <div class="core-particle particle-three"></div>
+
+
+                        <div class="core-energy">
+
+                            <div class="core-inner">
+                                AI
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="core-status">
+
+                        <span class="status-dot"></span>
+
+                        <strong>
+                            NEURAL CORE ONLINE
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 PRIMARY STATISTICS
+            ============================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            REAL-TIME TELEMETRY
+                        </span>
+
+                        <h2 class="section-heading">
+                            System Overview
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-live-indicator">
+
+                        <span class="status-dot"></span>
+
+                        LIVE DATA
+
+                    </span>
+
+                </div>
+
+
+                <div class="stats-grid dashboard-stats">
+
+
+                    <!-- TOTAL SCANS -->
+
+                    <article class="stat-card tilt-card">
+
+                        <div class="stat-card-top">
+
+                            <span class="stat-icon">
+                                ◎
+                            </span>
+
+                            <span class="stat-label">
+                                TOTAL SCANS
+                            </span>
+
+                        </div>
+
+                        <strong
+                            class="stat-value"
+                            id="totalScans"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-description">
+                            Complete intelligence records
+                        </span>
+
+                    </article>
+
+
+                    <!-- OBJECTS -->
+
+                    <article class="stat-card tilt-card">
+
+                        <div class="stat-card-top">
+
+                            <span class="stat-icon">
+                                ◇
+                            </span>
+
+                            <span class="stat-label">
+                                OBJECTS DETECTED
+                            </span>
+
+                        </div>
+
+                        <strong
+                            class="stat-value"
+                            id="totalObjects"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-description">
+                            YOLO detections across all scans
+                        </span>
+
+                    </article>
+
+
+                    <!-- UPLOAD -->
+
+                    <article class="stat-card tilt-card">
+
+                        <div class="stat-card-top">
+
+                            <span class="stat-icon">
+                                ↑
+                            </span>
+
+                            <span class="stat-label">
+                                UPLOAD SCANS
+                            </span>
+
+                        </div>
+
+                        <strong
+                            class="stat-value"
+                            id="uploadScans"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-description">
+                            Images submitted manually
+                        </span>
+
+                    </article>
+
+
+                    <!-- CAMERA -->
+
+                    <article class="stat-card tilt-card">
+
+                        <div class="stat-card-top">
+
+                            <span class="stat-icon">
+                                ◉
+                            </span>
+
+                            <span class="stat-label">
+                                CAMERA SCANS
+                            </span>
+
+                        </div>
+
+                        <strong
+                            class="stat-value"
+                            id="cameraScans"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-description">
+                            Intelligence captured by camera
+                        </span>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 TIME ANALYTICS
+            ============================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ACTIVITY ANALYTICS
+                        </span>
+
+                        <h2 class="section-heading">
+                            Scan Activity
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity-grid">
+
+
+                    <article class="activity-card glass-panel">
+
+                        <div class="activity-icon">
+                            24H
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TODAY
+                            </span>
+
+                            <strong id="todayScans">
+                                0
+                            </strong>
+
+                            <small>
+                                scans recorded today
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="activity-card glass-panel">
+
+                        <div class="activity-icon">
+                            7D
+                        </div>
+
+                        <div>
+
+                            <span>
+                                LAST 7 DAYS
+                            </span>
+
+                            <strong id="sevenDayScans">
+                                0
+                            </strong>
+
+                            <small>
+                                scans this week
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="activity-card glass-panel">
+
+                        <div class="activity-icon">
+                            30D
+                        </div>
+
+                        <div>
+
+                            <span>
+                                LAST 30 DAYS
+                            </span>
+
+                            <strong id="thirtyDayScans">
+                                0
+                            </strong>
+
+                            <small>
+                                scans this month
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="activity-card glass-panel">
+
+                        <div class="activity-icon">
+                            AVG
+                        </div>
+
+                        <div>
+
+                            <span>
+                                OBJECTS / SCAN
+                            </span>
+
+                            <strong id="averageObjects">
+                                0.00
+                            </strong>
+
+                            <small>
+                                average YOLO detections
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 MODULES
+            ============================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            INTELLIGENCE MODULES
+                        </span>
+
+                        <h2 class="section-heading">
+                            Recognition Workspace
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="module-grid">
+
+
+                    <!-- SCANNER -->
+
+                    <a
+                        href="./scanner.html"
+                        class="module-card glass-panel tilt-card"
+                    >
+
+                        <div class="module-card-header">
+
+                            <span class="module-icon">
+                                ◎
+                            </span>
+
+                            <span class="module-status">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            AI Image Scanner
+                        </h3>
+
+                        <p>
+                            Upload an image and run the complete
+                            OpenCV, YOLO and Gemini recognition
+                            pipeline.
+                        </p>
+
+
+                        <div class="module-footer">
+
+                            <span>
+                                ENTER SCANNER
+                            </span>
+
+                            <strong>
+                                →
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- CAMERA -->
+
+                    <a
+                        href="./camera.html"
+                        class="module-card glass-panel tilt-card"
+                    >
+
+                        <div class="module-card-header">
+
+                            <span class="module-icon">
+                                ◉
+                            </span>
+
+                            <span class="module-status">
+                                READY
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Live Vision
+                        </h3>
+
+                        <p>
+                            Activate your webcam for live YOLO
+                            detection and detailed AI camera
+                            analysis.
+                        </p>
+
+
+                        <div class="module-footer">
+
+                            <span>
+                                OPEN CAMERA
+                            </span>
+
+                            <strong>
+                                →
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- HISTORY -->
+
+                    <a
+                        href="./history.html"
+                        class="module-card glass-panel tilt-card"
+                    >
+
+                        <div class="module-card-header">
+
+                            <span class="module-icon">
+                                ⌁
+                            </span>
+
+                            <span class="module-status">
+                                ONLINE
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Intelligence Archive
+                        </h3>
+
+                        <p>
+                            Search previous scans by keyword,
+                            date range, object, brand, model or
+                            detected text.
+                        </p>
+
+
+                        <div class="module-footer">
+
+                            <span>
+                                VIEW HISTORY
+                            </span>
+
+                            <strong>
+                                →
+                            </strong>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 PIPELINE STATUS
+            ============================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="pipeline-dashboard glass-panel">
+
+                    <div class="pipeline-dashboard-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                SYSTEM PIPELINE
+                            </span>
+
+                            <h2>
+                                AI Infrastructure
+                            </h2>
+
+                        </div>
+
+
+                        <span class="success-chip">
+                            ALL SYSTEMS READY
+                        </span>
+
+                    </div>
+
+
+                    <div class="pipeline-dashboard-grid">
+
+
+                        <div class="pipeline-node">
+
+                            <div class="pipeline-node-icon">
+                                CV
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    COMPUTER VISION
+                                </span>
+
+                                <strong>
+                                    OpenCV
+                                </strong>
+
+                            </div>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <div class="pipeline-node">
+
+                            <div class="pipeline-node-icon">
+                                YO
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    OBJECT DETECTION
+                                </span>
+
+                                <strong>
+                                    YOLO
+                                </strong>
+
+                            </div>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <div class="pipeline-node">
+
+                            <div class="pipeline-node-icon">
+                                AI
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    VISUAL INTELLIGENCE
+                                </span>
+
+                                <strong>
+                                    Gemini
+                                </strong>
+
+                            </div>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <div class="pipeline-node">
+
+                            <div class="pipeline-node-icon">
+                                CL
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    IMAGE STORAGE
+                                </span>
+
+                                <strong>
+                                    Cloudinary
+                                </strong>
+
+                            </div>
+
+                            <i></i>
+
+                        </div>
+
+
+                        <div class="pipeline-node">
+
+                            <div class="pipeline-node-icon">
+                                DB
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    DATABASE
+                                </span>
+
+                                <strong>
+                                    Supabase
+                                </strong>
+
+                            </div>
+
+                            <i></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    >
+
+        <div
+            class="app-toast"
+            id="toast"
+        >
+
+            <span
+                class="toast-icon"
+                id="toastIcon"
+            >
+                ◉
+            </span>
+
+            <span id="toastMessage">
+                System notification
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="./js/api.js"></script>
+
+    <script src="./js/app.js"></script>
+
+</body>
+
+</html>
