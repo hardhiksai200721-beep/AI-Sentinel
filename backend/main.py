@@ -25,17 +25,17 @@ app = FastAPI(
 # CORS CONFIGURATION
 # ============================================================
 
-# Local development origins.
-#
-# Production/preview Vercel deployments are handled by
-# allow_origin_regex below.
-
-LOCAL_ORIGINS = [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "https://ai-sentinel-ashy.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 app.add_middleware(
